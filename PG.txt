@@ -1,0 +1,269 @@
+user6=> select id,name,title from test where id=900000;
+   id   |                                                 name                                                 |
+
+                                                  title
+
+--------+------------------------------------------------------------------------------------------------------+-------------------------------------------
+-----------------------------------------------------------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------------------------------------------------
+ 900000 | 6bTAfBA6ndfB9yNYbsKQ2RRZENkzE3sAHFrnaZQDAAiEkTQBDFsH6BrT4GdEnRQZTzSRrz7f5Gn5YBEDKNe9Ei5GheSE7TzNe7Qh | 8dkRYh24G6Tkher4EikEKdDtsn6FzRAesF2tT4tAbT
+5FTASNrteYHRynz5eaByataBnBtEF7h4iFFFEFYftdneY2rkQrFf8f6EYR8dkRYh24G6Tkher4EikEKdDtsn6FzRAesF2tT4tAbT5FTASNrteYHRynz5eaByataBnBtEF7h4iFFFEFYftdneY2rkQrFf8f6
+EYR8dkRYh24G6Tkher4EikEKdDtsn6FzRAesF2tT4tAbT5FTASNrteYHRynz5eaByataBnBtEF7h4iFFFEFYftdneY2rkQrFf8f6EYR8dkRYh24G6Tkher4EikEKdDtsn6FzRAesF2tT4tAbT5FTASNrteY
+HRynz5eaByataBnBtEF7h4iFFFEFYftdneY2rkQrFf8f6EYR8dkRYh24G6Tkher4EikEKdDtsn6FzRAesF2tT4tAbT5FTASNrteYHRynz5eaByataBnBtEF7h4iFFFEFYftdneY2rkQrFf8f6EYR
+(1 row)
+
+////////////////////////////////////////////////////////////////////////////////
+
+user6=> explain select id,name,title from test where id=900000;
+                        QUERY PLAN
+----------------------------------------------------------
+ Seq Scan on test  (cost=0.00..95834.14 rows=1 width=609)
+   Filter: (id = 900000)
+(2 rows)
+
+////////////////////////////////////////////////////////////////////////////////
+
+user6=> explain analyse select id,name,title from test where id=900000;
+                                               QUERY PLAN
+--------------------------------------------------------------------------------------------------------
+ Seq Scan on test  (cost=0.00..95834.14 rows=1 width=609) (actual time=535.177..558.547 rows=1 loops=1)
+   Filter: (id = 900000)
+   Rows Removed by Filter: 999999
+ Planning time: 0.574 ms
+ Execution time: 567.770 ms
+(5 rows)
+
+////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
+
+user6=> select id,name,title from test where name='6bTAfBA6ndfB9yNYbsKQ2RRZENkzE3sAHFrnaZQDAAiEkTQBDFsH6BrT4GdEnRQZTzSRrz7f5Gn5YBEDKNe9Ei5GheSE7TzNe7Qh';
+   id   |                                                 name                                                 |
+
+                                                  title
+
+--------+------------------------------------------------------------------------------------------------------+-------------------------------------------
+-----------------------------------------------------------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------------------------------------------------
+ 900000 | 6bTAfBA6ndfB9yNYbsKQ2RRZENkzE3sAHFrnaZQDAAiEkTQBDFsH6BrT4GdEnRQZTzSRrz7f5Gn5YBEDKNe9Ei5GheSE7TzNe7Qh | 8dkRYh24G6Tkher4EikEKdDtsn6FzRAesF2tT4tAbT
+5FTASNrteYHRynz5eaByataBnBtEF7h4iFFFEFYftdneY2rkQrFf8f6EYR8dkRYh24G6Tkher4EikEKdDtsn6FzRAesF2tT4tAbT5FTASNrteYHRynz5eaByataBnBtEF7h4iFFFEFYftdneY2rkQrFf8f6
+EYR8dkRYh24G6Tkher4EikEKdDtsn6FzRAesF2tT4tAbT5FTASNrteYHRynz5eaByataBnBtEF7h4iFFFEFYftdneY2rkQrFf8f6EYR8dkRYh24G6Tkher4EikEKdDtsn6FzRAesF2tT4tAbT5FTASNrteY
+HRynz5eaByataBnBtEF7h4iFFFEFYftdneY2rkQrFf8f6EYR8dkRYh24G6Tkher4EikEKdDtsn6FzRAesF2tT4tAbT5FTASNrteYHRynz5eaByataBnBtEF7h4iFFFEFYftdneY2rkQrFf8f6EYR
+(1 row)
+
+////////////////////////////////////////////////////////////////////////////////
+
+user6=> explain select id,name,title from test where name='6bTAfBA6ndfB9yNYbsKQ2RRZENkzE3sAHFrnaZQDAAiEkTQBDFsH6BrT4GdEnRQZTzSRrz7f5Gn5YBEDKNe9Ei5GheSE7TzNe7Qh';
+                                                               QUERY PLAN
+-----------------------------------------------------------------------------------------------------------------------------------------
+ Seq Scan on test  (cost=0.00..95834.14 rows=1 width=609)
+   Filter: ((name)::text = '6bTAfBA6ndfB9yNYbsKQ2RRZENkzE3sAHFrnaZQDAAiEkTQBDFsH6BrT4GdEnRQZTzSRrz7f5Gn5YBEDKNe9Ei5GheSE7TzNe7Qh'::text)
+(2 rows)
+
+////////////////////////////////////////////////////////////////////////////////
+
+user6=> explain analyse select id,name,title from test where name='6bTAfBA6ndfB9yNYbsKQ2RRZENkzE3sAHFrnaZQDAAiEkTQBDFsH6BrT4GdEnRQZTzSRrz7f5Gn5YBEDKNe9Ei5GheSE7TzNe7Qh';
+                                                               QUERY PLAN
+-----------------------------------------------------------------------------------------------------------------------------------------
+ Seq Scan on test  (cost=0.00..95834.14 rows=1 width=609) (actual time=463.436..489.621 rows=1 loops=1)
+   Filter: ((name)::text = '6bTAfBA6ndfB9yNYbsKQ2RRZENkzE3sAHFrnaZQDAAiEkTQBDFsH6BrT4GdEnRQZTzSRrz7f5Gn5YBEDKNe9Ei5GheSE7TzNe7Qh'::text)
+   Rows Removed by Filter: 999999
+ Planning time: 0.105 ms
+ Execution time: 489.665 ms
+(5 rows)
+
+////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
+
+user6=> select id,name,title from test where title='8dkRYh24G6Tkher4EikEKdDtsn6FzRAesF2tT4tAbT5FTASNrteYHRynz5eaByataBnBtEF7h4iFFFEFYftdneY2rkQrFf8f6EYR8dkRYh24G6Tkher4EikEKdDtsn6FzRAesF2tT4tAbT5FTASNrteYHRynz5eaByataBnBtEF7h4iFFFEFYftdneY2rkQrFf8f6EYR8dkRYh24G6Tkher4EikEKdDtsn6FzRAesF2tT4tAbT5FTASNrteYHRynz5eaByataBnBtEF7h4iFFFEFYftdneY2rkQrFf8f6EYR8dkRYh24G6Tkher4EikEKdDtsn6FzRAesF2tT4tAbT5FTASNrteYHRynz5eaByataBnBtEF7h4iFFFEFYftdneY2rkQrFf8f6EYR8dkRYh24G6Tkher4EikEKdDtsn6FzRAesF2tT4tAbT5FTASNrteYHRynz5eaByataBnBtEF7h4iFFFEFYftdneY2rkQrFf8f6EYR';
+   id   |                                                 name                                                 |
+
+                                                  title
+
+--------+------------------------------------------------------------------------------------------------------+-------------------------------------------
+-----------------------------------------------------------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------------------------------------------------
+ 900000 | 6bTAfBA6ndfB9yNYbsKQ2RRZENkzE3sAHFrnaZQDAAiEkTQBDFsH6BrT4GdEnRQZTzSRrz7f5Gn5YBEDKNe9Ei5GheSE7TzNe7Qh | 8dkRYh24G6Tkher4EikEKdDtsn6FzRAesF2tT4tAbT
+5FTASNrteYHRynz5eaByataBnBtEF7h4iFFFEFYftdneY2rkQrFf8f6EYR8dkRYh24G6Tkher4EikEKdDtsn6FzRAesF2tT4tAbT5FTASNrteYHRynz5eaByataBnBtEF7h4iFFFEFYftdneY2rkQrFf8f6
+EYR8dkRYh24G6Tkher4EikEKdDtsn6FzRAesF2tT4tAbT5FTASNrteYHRynz5eaByataBnBtEF7h4iFFFEFYftdneY2rkQrFf8f6EYR8dkRYh24G6Tkher4EikEKdDtsn6FzRAesF2tT4tAbT5FTASNrteY
+HRynz5eaByataBnBtEF7h4iFFFEFYftdneY2rkQrFf8f6EYR8dkRYh24G6Tkher4EikEKdDtsn6FzRAesF2tT4tAbT5FTASNrteYHRynz5eaByataBnBtEF7h4iFFFEFYftdneY2rkQrFf8f6EYR
+(1 row)
+
+////////////////////////////////////////////////////////////////////////////////
+
+user6=> explain  select id,name,title from test where title='8dkRYh24G6Tkher4EikEKdDtsn6FzRAesF2tT4tAbT5FTASNrteYHRynz5eaByataBnBtEF7h4iFFFEFYftdneY2rkQrFf8f6EYR8dkRYh24G6Tkher4EikEKdDtsn6FzRAesF2tT4tAbT5FTASNrteYHRynz5eaByataBnBtEF7h4iFFFEFYftdneY2rkQrFf8f6EYR8dkRYh24G6Tkher4EikEKdDtsn6FzRAesF2tT4tAbT5FTASNrteYHRynz5eaByataBnBtEF7h4iFFFEFYftdneY2rkQrFf8f6EYR8dkRYh24G6Tkher4EikEKdDtsn6FzRAesF2tT4tAbT5FTASNrteYHRynz5eaByataBnBtEF7h4iFFFEFYftdneY2rkQrFf8f6EYR8dkRYh24G6Tkher4EikEKdDtsn6FzRAesF2tT4tAbT5FTASNrteYHRynz5eaByataBnBtEF7h4iFFFEFYftdneY2rkQrFf8f6EYR';
+
+                                                                                                         QUERY PLAN
+
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------
+ Seq Scan on test  (cost=0.00..95834.14 rows=1 width=609)
+   Filter: (title = '8dkRYh24G6Tkher4EikEKdDtsn6FzRAesF2tT4tAbT5FTASNrteYHRynz5eaByataBnBtEF7h4iFFFEFYftdneY2rkQrFf8f6EYR8dkRYh24G6Tkher4EikEKdDtsn6FzRAesF
+2tT4tAbT5FTASNrteYHRynz5eaByataBnBtEF7h4iFFFEFYftdneY2rkQrFf8f6EYR8dkRYh24G6Tkher4EikEKdDtsn6FzRAesF2tT4tAbT5FTASNrteYHRynz5eaByataBnBtEF7h4iFFFEFYftdneY2r
+kQrFf8f6EYR8dkRYh24G6Tkher4EikEKdDtsn6FzRAesF2tT4tAbT5FTASNrteYHRynz5eaByataBnBtEF7h4iFFFEFYftdneY2rkQrFf8f6EYR8dkRYh24G6Tkher4EikEKdDtsn6FzRAesF2tT4tAbT5F
+TASNrteYHRynz5eaByataBnBtEF7h4iFFFEFYftdneY2rkQrFf8f6EYR'::text)
+(2 rows)
+
+////////////////////////////////////////////////////////////////////////////////
+
+user6=> explain analyse  select id,name,title from test where title='8dkRYh24G6Tkher4EikEKdDtsn6FzRAesF2tT4tAbT5FTASNrteYHRynz5eaByataBnBtEF7h4iFFFEFYftdneY2rkQrFf8f6EYR8dkRYh24G6Tkher4EikEKdDtsn6FzRAesF2tT4tAbT5FTASNrteYHRynz5eaByataBnBtEF7h4iFFFEFYftdneY2rkQrFf8f6EYR8dkRYh24G6Tkher4EikEKdDtsn6FzRAesF2tT4tAbT5FTASNrteYHRynz5eaByataBnBtEF7h4iFFFEFYftdneY2rkQrFf8f6EYR8dkRYh24G6Tkher4EikEKdDtsn6FzRAesF2tT4tAbT5FTASNrteYHRynz5eaByataBnBtEF7h4iFFFEFYftdneY2rkQrFf8f6EYR8dkRYh24G6Tkher4EikEKdDtsn6FzRAesF2tT4tAbT5FTASNrteYHRynz5eaByataBnBtEF7h4iFFFEFYftdneY2rkQrFf8f6EYR';
+
+                                                                                                         QUERY PLAN
+
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------
+ Seq Scan on test  (cost=0.00..95834.14 rows=1 width=609) (actual time=493.184..533.175 rows=1 loops=1)
+   Filter: (title = '8dkRYh24G6Tkher4EikEKdDtsn6FzRAesF2tT4tAbT5FTASNrteYHRynz5eaByataBnBtEF7h4iFFFEFYftdneY2rkQrFf8f6EYR8dkRYh24G6Tkher4EikEKdDtsn6FzRAesF
+2tT4tAbT5FTASNrteYHRynz5eaByataBnBtEF7h4iFFFEFYftdneY2rkQrFf8f6EYR8dkRYh24G6Tkher4EikEKdDtsn6FzRAesF2tT4tAbT5FTASNrteYHRynz5eaByataBnBtEF7h4iFFFEFYftdneY2r
+kQrFf8f6EYR8dkRYh24G6Tkher4EikEKdDtsn6FzRAesF2tT4tAbT5FTASNrteYHRynz5eaByataBnBtEF7h4iFFFEFYftdneY2rkQrFf8f6EYR8dkRYh24G6Tkher4EikEKdDtsn6FzRAesF2tT4tAbT5F
+TASNrteYHRynz5eaByataBnBtEF7h4iFFFEFYftdneY2rkQrFf8f6EYR'::text)
+   Rows Removed by Filter: 999999
+ Planning time: 0.080 ms
+ Execution time: 533.322 ms
+(5 rows)
+
+////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
+
+
+//////////////////////////////////INDEX/////////////////////////////////////////
+
+
+user6=> select id,name,title from test where id=900000;
+   id   |                                                 name                                                 |
+
+                                                  title
+
+--------+------------------------------------------------------------------------------------------------------+-------------------------------------------
+-----------------------------------------------------------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------------------------------------------------
+ 900000 | 6bTAfBA6ndfB9yNYbsKQ2RRZENkzE3sAHFrnaZQDAAiEkTQBDFsH6BrT4GdEnRQZTzSRrz7f5Gn5YBEDKNe9Ei5GheSE7TzNe7Qh | 8dkRYh24G6Tkher4EikEKdDtsn6FzRAesF2tT4tAbT
+5FTASNrteYHRynz5eaByataBnBtEF7h4iFFFEFYftdneY2rkQrFf8f6EYR8dkRYh24G6Tkher4EikEKdDtsn6FzRAesF2tT4tAbT5FTASNrteYHRynz5eaByataBnBtEF7h4iFFFEFYftdneY2rkQrFf8f6
+EYR8dkRYh24G6Tkher4EikEKdDtsn6FzRAesF2tT4tAbT5FTASNrteYHRynz5eaByataBnBtEF7h4iFFFEFYftdneY2rkQrFf8f6EYR8dkRYh24G6Tkher4EikEKdDtsn6FzRAesF2tT4tAbT5FTASNrteY
+HRynz5eaByataBnBtEF7h4iFFFEFYftdneY2rkQrFf8f6EYR8dkRYh24G6Tkher4EikEKdDtsn6FzRAesF2tT4tAbT5FTASNrteYHRynz5eaByataBnBtEF7h4iFFFEFYftdneY2rkQrFf8f6EYR
+(1 row)
+
+////////////////////////////////////////////////////////////////////////////////
+
+user6=> explain select id,name,title from test where id=900000;
+                                 QUERY PLAN
+-----------------------------------------------------------------------------
+ Index Only Scan using i_indexes on test  (cost=0.80..8.82 rows=1 width=609)
+   Index Cond: (id = 900000)
+(2 rows)
+
+////////////////////////////////////////////////////////////////////////////////
+
+user6=> explain analyse select id,name,title from test where id=900000;
+                                                      QUERY PLAN
+-----------------------------------------------------------------------------------------------------------------------
+ Index Only Scan using i_indexes on test  (cost=0.80..8.82 rows=1 width=609) (actual time=0.031..0.033 rows=1 loops=1)
+   Index Cond: (id = 900000)
+   Heap Fetches: 1
+ Planning time: 0.107 ms
+ Execution time: 0.076 ms
+(5 rows)
+
+////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
+
+
+user6=> select id,name,title from test where name='6bTAfBA6ndfB9yNYbsKQ2RRZENkzE3sAHFrnaZQDAAiEkTQBDFsH6BrT4GdEnRQZTzSRrz7f5Gn5YBEDKNe9Ei5GheSE7TzNe7Qh';     id   |                                                 name                                                 |
+
+                                                  title
+
+--------+------------------------------------------------------------------------------------------------------+-------------------------------------------
+-----------------------------------------------------------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------------------------------------------------
+ 900000 | 6bTAfBA6ndfB9yNYbsKQ2RRZENkzE3sAHFrnaZQDAAiEkTQBDFsH6BrT4GdEnRQZTzSRrz7f5Gn5YBEDKNe9Ei5GheSE7TzNe7Qh | 8dkRYh24G6Tkher4EikEKdDtsn6FzRAesF2tT4tAbT
+5FTASNrteYHRynz5eaByataBnBtEF7h4iFFFEFYftdneY2rkQrFf8f6EYR8dkRYh24G6Tkher4EikEKdDtsn6FzRAesF2tT4tAbT5FTASNrteYHRynz5eaByataBnBtEF7h4iFFFEFYftdneY2rkQrFf8f6
+EYR8dkRYh24G6Tkher4EikEKdDtsn6FzRAesF2tT4tAbT5FTASNrteYHRynz5eaByataBnBtEF7h4iFFFEFYftdneY2rkQrFf8f6EYR8dkRYh24G6Tkher4EikEKdDtsn6FzRAesF2tT4tAbT5FTASNrteY
+HRynz5eaByataBnBtEF7h4iFFFEFYftdneY2rkQrFf8f6EYR8dkRYh24G6Tkher4EikEKdDtsn6FzRAesF2tT4tAbT5FTASNrteYHRynz5eaByataBnBtEF7h4iFFFEFYftdneY2rkQrFf8f6EYR
+(1 row)
+
+////////////////////////////////////////////////////////////////////////////////
+
+user6=> explain select id,name,title from test where name='6bTAfBA6ndfB9yNYbsKQ2RRZENkzE3sAHFrnaZQDAAiEkTQBDFsH6BrT4GdEnRQZTzSRrz7f5Gn5YBEDKNe9Ei5GheSE7TzNe7Qh';
+                                                                 QUERY PLAN
+---------------------------------------------------------------------------------------------------------------------------------------------
+ Index Scan using i_name on test  (cost=0.55..8.57 rows=1 width=609)
+   Index Cond: ((name)::text = '6bTAfBA6ndfB9yNYbsKQ2RRZENkzE3sAHFrnaZQDAAiEkTQBDFsH6BrT4GdEnRQZTzSRrz7f5Gn5YBEDKNe9Ei5GheSE7TzNe7Qh'::text)
+(2 rows)
+
+////////////////////////////////////////////////////////////////////////////////
+
+user6=> explain analyse select id,name,title from test where name='6bTAfBA6ndfB9yNYbsKQ2RRZENkzE3sAHFrnaZQDAAiEkTQBDFsH6BrT4GdEnRQZTzSRrz7f5Gn5YBEDKNe9Ei5GheSE7TzNe7Qh';
+                                                                 QUERY PLAN
+---------------------------------------------------------------------------------------------------------------------------------------------
+ Index Scan using i_name on test  (cost=0.55..8.57 rows=1 width=609) (actual time=0.057..0.060 rows=1 loops=1)
+   Index Cond: ((name)::text = '6bTAfBA6ndfB9yNYbsKQ2RRZENkzE3sAHFrnaZQDAAiEkTQBDFsH6BrT4GdEnRQZTzSRrz7f5Gn5YBEDKNe9Ei5GheSE7TzNe7Qh'::text)
+ Planning time: 1.133 ms
+ Execution time: 0.121 ms
+(4 rows)
+
+////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
+
+
+user6=> select id,name,title from test where title='8dkRYh24G6Tkher4EikEKdDtsn6FzRAesF2tT4tAbT5FTASNrteYHRynz5eaByataBnBtEF7h4iFFFEFYftdneY2rkQrFf8f6EYR8dkRYh24G6Tkher4EikEKdDtsn6FzRAesF2tT4tAbT5FTASNrteYHRynz5eaByataBnBtEF7h4iFFFEFYftdneY2rkQrFf8f6EYR8dkRYh24G6Tkher4EikEKdDtsn6FzRAesF2tT4tAbT5FTASNrteYHRynz5eaByataBnBtEF7h4iFFFEFYftdneY2rkQrFf8f6EYR8dkRYh24G6Tkher4EikEKdDtsn6FzRAesF2tT4tAbT5FTASNrteYHRynz5eaByataBnBtEF7h4iFFFEFYftdneY2rkQrFf8f6EYR8dkRYh24G6Tkher4EikEKdDtsn6FzRAesF2tT4tAbT5FTASNrteYHRynz5eaByataBnBtEF7h4iFFFEFYftdneY2rkQrFf8f6EYR';
+   id   |                                                 name                                                 |
+
+                                                  title
+
+--------+------------------------------------------------------------------------------------------------------+-------------------------------------------
+-----------------------------------------------------------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------------------------------------------------
+ 900000 | 6bTAfBA6ndfB9yNYbsKQ2RRZENkzE3sAHFrnaZQDAAiEkTQBDFsH6BrT4GdEnRQZTzSRrz7f5Gn5YBEDKNe9Ei5GheSE7TzNe7Qh | 8dkRYh24G6Tkher4EikEKdDtsn6FzRAesF2tT4tAbT
+5FTASNrteYHRynz5eaByataBnBtEF7h4iFFFEFYftdneY2rkQrFf8f6EYR8dkRYh24G6Tkher4EikEKdDtsn6FzRAesF2tT4tAbT5FTASNrteYHRynz5eaByataBnBtEF7h4iFFFEFYftdneY2rkQrFf8f6
+EYR8dkRYh24G6Tkher4EikEKdDtsn6FzRAesF2tT4tAbT5FTASNrteYHRynz5eaByataBnBtEF7h4iFFFEFYftdneY2rkQrFf8f6EYR8dkRYh24G6Tkher4EikEKdDtsn6FzRAesF2tT4tAbT5FTASNrteY
+HRynz5eaByataBnBtEF7h4iFFFEFYftdneY2rkQrFf8f6EYR8dkRYh24G6Tkher4EikEKdDtsn6FzRAesF2tT4tAbT5FTASNrteYHRynz5eaByataBnBtEF7h4iFFFEFYftdneY2rkQrFf8f6EYR
+(1 row)
+
+////////////////////////////////////////////////////////////////////////////////
+
+user6=> explain select id,name,title from test where title='8dkRYh24G6Tkher4EikEKdDtsn6FzRAesF2tT4tAbT5FTASNrteYHRynz5eaByataBnBtEF7h4iFFFEFYftdneY2rkQrFf8f6EYR8dkRYh24G6Tkher4EikEKdDtsn6FzRAesF2tT4tAbT5FTASNrteYHRynz5eaByataBnBtEF7h4iFFFEFYftdneY2rkQrFf8f6EYR8dkRYh24G6Tkher4EikEKdDtsn6FzRAesF2tT4tAbT5FTASNrteYHRynz5eaByataBnBtEF7h4iFFFEFYftdneY2rkQrFf8f6EYR8dkRYh24G6Tkher4EikEKdDtsn6FzRAesF2tT4tAbT5FTASNrteYHRynz5eaByataBnBtEF7h4iFFFEFYftdneY2rkQrFf8f6EYR8dkRYh24G6Tkher4EikEKdDtsn6FzRAesF2tT4tAbT5FTASNrteYHRynz5eaByataBnBtEF7h4iFFFEFYftdneY2rkQrFf8f6EYR';
+
+                                                                                                           QUERY PLAN
+
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------------------------------------------------------
+---------------------------------------------------------------------
+ Index Scan using i_title on test  (cost=0.80..8.82 rows=1 width=609)
+   Index Cond: (title = '8dkRYh24G6Tkher4EikEKdDtsn6FzRAesF2tT4tAbT5FTASNrteYHRynz5eaByataBnBtEF7h4iFFFEFYftdneY2rkQrFf8f6EYR8dkRYh24G6Tkher4EikEKdDtsn6FzR
+AesF2tT4tAbT5FTASNrteYHRynz5eaByataBnBtEF7h4iFFFEFYftdneY2rkQrFf8f6EYR8dkRYh24G6Tkher4EikEKdDtsn6FzRAesF2tT4tAbT5FTASNrteYHRynz5eaByataBnBtEF7h4iFFFEFYftdn
+eY2rkQrFf8f6EYR8dkRYh24G6Tkher4EikEKdDtsn6FzRAesF2tT4tAbT5FTASNrteYHRynz5eaByataBnBtEF7h4iFFFEFYftdneY2rkQrFf8f6EYR8dkRYh24G6Tkher4EikEKdDtsn6FzRAesF2tT4tA
+bT5FTASNrteYHRynz5eaByataBnBtEF7h4iFFFEFYftdneY2rkQrFf8f6EYR'::text)
+(2 rows)
+
+////////////////////////////////////////////////////////////////////////////////
+
+user6=> explain analyse select id,name,title from test where title='8dkRYh24G6Tkher4EikEKdDtsn6FzRAesF2tT4tAbT5FTASNrteYHRynz5eaByataBnBtEF7h4iFFFEFYftdneY2rkQrFf8f6EYR8dkRYh24G6Tkher4EikEKdDtsn6FzRAesF2tT4tAbT5FTASNrteYHRynz5eaByataBnBtEF7h4iFFFEFYftdneY2rkQrFf8f6EYR8dkRYh24G6Tkher4EikEKdDtsn6FzRAesF2tT4tAbT5FTASNrteYHRynz5eaByataBnBtEF7h4iFFFEFYftdneY2rkQrFf8f6EYR8dkRYh24G6Tkher4EikEKdDtsn6FzRAesF2tT4tAbT5FTASNrteYHRynz5eaByataBnBtEF7h4iFFFEFYftdneY2rkQrFf8f6EYR8dkRYh24G6Tkher4EikEKdDtsn6FzRAesF2tT4tAbT5FTASNrteYHRynz5eaByataBnBtEF7h4iFFFEFYftdneY2rkQrFf8f6EYR';
+
+                                                                                                           QUERY PLAN
+
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------------------------------------------------------
+---------------------------------------------------------------------
+ Index Scan using i_title on test  (cost=0.80..8.82 rows=1 width=609) (actual time=0.049..0.052 rows=1 loops=1)
+   Index Cond: (title = '8dkRYh24G6Tkher4EikEKdDtsn6FzRAesF2tT4tAbT5FTASNrteYHRynz5eaByataBnBtEF7h4iFFFEFYftdneY2rkQrFf8f6EYR8dkRYh24G6Tkher4EikEKdDtsn6FzR
+AesF2tT4tAbT5FTASNrteYHRynz5eaByataBnBtEF7h4iFFFEFYftdneY2rkQrFf8f6EYR8dkRYh24G6Tkher4EikEKdDtsn6FzRAesF2tT4tAbT5FTASNrteYHRynz5eaByataBnBtEF7h4iFFFEFYftdn
+eY2rkQrFf8f6EYR8dkRYh24G6Tkher4EikEKdDtsn6FzRAesF2tT4tAbT5FTASNrteYHRynz5eaByataBnBtEF7h4iFFFEFYftdneY2rkQrFf8f6EYR8dkRYh24G6Tkher4EikEKdDtsn6FzRAesF2tT4tA
+bT5FTASNrteYHRynz5eaByataBnBtEF7h4iFFFEFYftdneY2rkQrFf8f6EYR'::text)
+ Planning time: 0.113 ms
+ Execution time: 0.087 ms
+(4 rows)
